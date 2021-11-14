@@ -6,7 +6,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 @Entity(name = "sessions")
 @Getter
@@ -32,7 +31,6 @@ public class Session {
     @JoinTable(name = "session_speakers", joinColumns = @JoinColumn(name = "session_id"), inverseJoinColumns = @JoinColumn(name = "speaker_id"))
     private List<Speaker> speakers;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "session_id", joinColumns = @JoinColumn(name = "session_id"), inverseJoinColumns = @JoinColumn(name = "session_tag_id"))
-    private Set<SessionTag> session_tags;
+    @Embedded
+    private SessionTag session_tag;
 }
